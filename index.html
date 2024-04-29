@@ -5,15 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>monKey - Test your typing Skills</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <header>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#daaf38"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z"
+        />
+        <path d="M6 10l0 .01" />
+        <path d="M10 10l0 .01" />
+        <path d="M14 10l0 .01" />
+        <path d="M18 10l0 .01" />
+        <path d="M6 14l0 .01" />
+        <path d="M18 14l0 .01" />
+        <path d="M10 14l4 .01" />
+      </svg>
+      <h1>mon<span>Key</span></h1>
+    </header>
     <main>
       <section id="game">
         <time></time>
         <p></p>
         <input autofocus />
       </section>
+      <section id="results">
+        <h2>WPM</h2>
+        <h3 id="wpm"></h3>
+        <h2>Accuracy</h2>
+        <h3 id="accuracy"></h3>
+        <button>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747"
+            />
+            <path d="M20 4v5h-5" />
+          </svg>
+        </button>
+      </section>
     </main>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

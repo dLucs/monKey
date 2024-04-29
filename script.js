@@ -1,17 +1,23 @@
+import { words as INITIAL_WORDS } from "./data.js";
+
 const $time = document.querySelector("time");
 const $paragraph = document.querySelector("p");
 const $input = document.querySelector("input");
+const $results = document.getElementById("results");
+const $wpm = document.getElementById("wpm");
+const $accuracy = document.getElementById("accuracy");
+const $game = document.getElementById("game");
+const $reload = document.querySelector("button");
 
 const INITIAL_TIME = 30;
-
-const TEXT =
-  "deep within the tangled foliage of the digital jungle there lived a curious monkey he was no ordinary simian he had an insatiable appetite for knowledge and an inexplicable fascination with keyboards one day while swinging from vine to vine he stumbled upon a mysterious clearing in its center stood a colossal keyboard its keys glistening like ripe bananas his eyes widened with wonder he couldn not resist with nimble fingers he began to type";
 
 let words = [];
 let currentTime = INITIAL_TIME;
 
 function initGame() {
-  words = TEXT.split(" ").slice(0, 32);
+  $game.style.display = "flex";
+  $results.style.display = "none";
+  words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(0, 48);
   currentTime = INITIAL_TIME;
   $time.textContent = currentTime;
   $paragraph.innerHTML = words
@@ -33,7 +39,7 @@ function initGame() {
 
     if (currentTime == 0) {
       clearInterval(intervalId);
-      console.log("game over");
+      gameOver();
     }
   }, 1000);
 }
@@ -45,6 +51,7 @@ function initEvents() {
   });
   $input.addEventListener("keydown", onKeyDown);
   $input.addEventListener("keyup", onKeyUp);
+  $reload.addEventListener("click", initGame);
 }
 
 function onKeyDown(event) {
@@ -143,7 +150,21 @@ function onKeyUp() {
   }
 }
 
-function gameOver() {}
+function gameOver() {
+  $game.style.display = "none";
+  $results.style.display = "flex";
+
+  const correctWords = $paragraph.querySelectorAll("x-word.correct").length;
+  const correctLetter = $paragraph.querySelectorAll("x-letter.correct").length;
+  const incorrectLetter =
+    $paragraph.querySelectorAll("x-letter.incorrect").length;
+  const totalLetters = correctLetter + incorrectLetter;
+  const accuracy = totalLetters > 0 ? (correctLetter / totalLetters) * 100 : 0;
+
+  const wpm = (correctWords * 60) / INITIAL_TIME;
+  $wpm.textContent = wpm;
+  $accuracy.textContent = `${accuracy.toFixed(2)}%`;
+}
 
 initGame();
 initEvents();

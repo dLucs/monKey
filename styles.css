@@ -20,7 +20,7 @@ body {
 section {
   padding: 16px;
   gap: 4px;
-  max-width: 500px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
 }
@@ -33,7 +33,37 @@ input {
   top: 0;
   left: 0;
   pointer-events: none;
-  /* opacity: 0; */
+  opacity: 0;
+}
+h2 {
+  font-weight: 400;
+  opacity: 0.4;
+  margin: 0;
+  font-size: 16px;
+}
+h3 {
+  font-weight: 400;
+  margin: 0;
+  font-size: 24px;
+  color: var(--yellow);
+}
+button {
+  background: transparent;
+  border-style: solid;
+  border-radius: 0.5rem;
+  margin-top: 32px;
+  padding: 16px;
+  opacity: 0.4;
+  display: inline-block;
+  transition: opacity 0.1s ease-in-out, transform 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--yellow);
+    opacity: 1;
+    border-radius: 0.5rem;
+    border-style: none;
+    scale: 110%;
+  }
 }
 p {
   margin: 0;
@@ -49,7 +79,7 @@ x-letter {
     content: "|";
     position: absolute;
     color: var(--yellow);
-    font-size: 14px;
+    font-size: 24px;
     left: -65%;
     animation: 1s blink infinite ease-in-out;
   }
@@ -79,4 +109,30 @@ x-word {
   75% {
     opacity: 0;
   }
+}
+
+#game {
+  display: flex;
+  font-size: 22px;
+}
+
+#results {
+  display: none;
+}
+header {
+  position: absolute;
+  top: 01rem;
+  left: 3rem;
+}
+header,
+h1 {
+  display: inline-block;
+  margin: 0;
+  font-weight: 300;
+  font-family: "Roboto Mono", monospace;
+  font-stretch: condensed;
+}
+
+span {
+  color: var(--yellow);
 }
