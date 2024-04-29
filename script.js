@@ -114,32 +114,34 @@ function onKeyDown(event) {
   }
 }
 function onKeyUp() {
-  //get current elements
+  // Get current elements
   const $currentWord = $paragraph.querySelector("x-word.active");
   const $currentLetter = $currentWord.querySelector("x-letter.active");
 
-  //limit input to word size
+  // Limit input to word size
   const currentWord = $currentWord.innerText.trim();
   $input.maxLength = currentWord.length;
 
-  //Check letters
+  // Check letters
   const $allLetters = $currentWord.querySelectorAll("x-letter");
 
   $allLetters.forEach(($letter) =>
     $letter.classList.remove("correct", "incorrect")
   );
 
-  $input.value.split("").forEach((char, index) => {
+  const inputChars = $input.value.split("");
+  const minLength = Math.min(inputChars.length, $allLetters.length);
+
+  for (let index = 0; index < minLength; index++) {
+    const char = inputChars[index];
     const $letter = $allLetters[index];
     const letterToCheck = currentWord[index];
-
-    const isCorrect = char == letterToCheck;
-
+    const isCorrect = char === letterToCheck;
     const letterColor = isCorrect ? "correct" : "incorrect";
     $letter.classList.add(letterColor);
-  });
+  }
 
-  //move cursor to end of word
+  // Move cursor to end of word
   $currentLetter.classList.remove("active", "previously-active");
   const inputLength = $input.value.length;
   const $nextActiveLetter = $allLetters[inputLength];
