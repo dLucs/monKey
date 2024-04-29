@@ -131,6 +131,11 @@ function onKeyUp() {
 
   $input.value.split("").forEach((char, index) => {
     const $letter = $allLetters[index];
+
+    if (!$letter) {
+      return; // Skip if $letter is undefined
+    }
+
     const letterToCheck = currentWord[index];
 
     const isCorrect = char == letterToCheck;
