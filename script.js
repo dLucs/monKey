@@ -17,7 +17,7 @@ let currentTime = INITIAL_TIME;
 function initGame() {
   $game.style.display = "flex";
   $results.style.display = "none";
-  words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(0, 48);
+  words = INITIAL_WORDS.sort(() => Math.random() - 0.5).slice(0, 48);
   currentTime = INITIAL_TIME;
   $time.textContent = currentTime;
   $paragraph.innerHTML = words
@@ -88,7 +88,7 @@ function onKeyDown(event) {
     const $prevWord = $currentWord.previousElementSibling;
     const $prevLetter = $currentLetter.previousElementSibling;
 
-    if (!$prevWord && !prevLetter) {
+    if (!$prevWord && !$prevLetter) {
       event.preventDefault();
       return;
     }
@@ -114,34 +114,32 @@ function onKeyDown(event) {
   }
 }
 function onKeyUp() {
-  // Get current elements
+  //get current elements
   const $currentWord = $paragraph.querySelector("x-word.active");
   const $currentLetter = $currentWord.querySelector("x-letter.active");
 
-  // Limit input to word size
+  //limit input to word size
   const currentWord = $currentWord.innerText.trim();
   $input.maxLength = currentWord.length;
 
-  // Check letters
+  //Check letters
   const $allLetters = $currentWord.querySelectorAll("x-letter");
 
   $allLetters.forEach(($letter) =>
     $letter.classList.remove("correct", "incorrect")
   );
 
-  const inputChars = $input.value.split("");
-  const minLength = Math.min(inputChars.length, $allLetters.length);
-
-  for (let index = 0; index < minLength; index++) {
-    const char = inputChars[index];
+  $input.value.split("").forEach((char, index) => {
     const $letter = $allLetters[index];
     const letterToCheck = currentWord[index];
-    const isCorrect = char === letterToCheck;
+
+    const isCorrect = char == letterToCheck;
+
     const letterColor = isCorrect ? "correct" : "incorrect";
     $letter.classList.add(letterColor);
-  }
+  });
 
-  // Move cursor to end of word
+  //move cursor to end of word
   $currentLetter.classList.remove("active", "previously-active");
   const inputLength = $input.value.length;
   const $nextActiveLetter = $allLetters[inputLength];
